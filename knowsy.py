@@ -1,4 +1,4 @@
-#W.I.P.
+#This is a very much work in progress.
 
 import sys
 import os
