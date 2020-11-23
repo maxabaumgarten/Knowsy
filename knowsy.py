@@ -4,12 +4,11 @@ import sys
 import os
 import platform
 import ipaddress
-
-
+import csv
 
 #Ask user for IP address
 #format/validate input
-print("Welcome to Knowsy!  I know everything about IP addresses and Domains.")
+print("Welcome to Knowsy!  I know everything about IP addresses and Domains(coming soon).")
 
 address = input("What IP address do you want to know about? " )
 
@@ -29,7 +28,13 @@ while True:
         #if statement for classes based on OS
         if current_os == 'windows':
             dns_result = os.system('nslookup ' + address)
+            ping_result = os.system('ping ' + address)
+            trace_result = os.system('tracert ' + address)
+            
+
             print(dns_result)
+
+
 
         elif current_os == 'linux':
             dns_result == os.system('dig ' + address)
