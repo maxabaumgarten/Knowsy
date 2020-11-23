@@ -5,14 +5,27 @@ import os
 import platform
 import ipaddress
 import csv
+from address import IpAddress
 
 #Ask user for IP address
 #format/validate input
 print("Welcome to Knowsy!  I know everything about IP addresses and Domains(coming soon).")
 
-address = input("What IP address do you want to know about? " )
+ip_input = input("What IP address do you want to know about? ")
 
-while True:
+ip = IpAddress(ip_input)
+print(ip.return_ip_address())
+
+
+ip.set_ip_address("2.2.2.2")
+print(ip.return_ip_address())
+
+ip.set_ip_address("codingiscool")
+print(ip.return_ip_address())
+
+
+#old code
+""" while True:
     try:
         ipaddress.ip_address(address)
     except ValueError:
@@ -30,14 +43,14 @@ while True:
             dns_result = os.system('nslookup ' + address)
             ping_result = os.system('ping ' + address)
             trace_result = os.system('tracert ' + address)
-            
+
 
             print(dns_result)
 
 
 
         elif current_os == 'linux':
-            dns_result == os.system('dig ' + address)
+            dns_result = os.system('host ' + address)
             print(dns_result)
-        break
+        break """
 
