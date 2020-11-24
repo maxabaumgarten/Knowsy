@@ -27,8 +27,11 @@ class IpAddress:
     def ping_check(self):
         """Performs a ping check against the IP"""
         ping_result = ping(self.address, count=4, verbose=True)
-        if "Request timed out" in ping_result:
-            return print("That address cannot be pinged from this host.")
-        else:
-            return ping_result
+        for response in ping_result:
+            if "Request timed out" in response:
+                return print("That address cannot be pinged from this host.")
+         #if "Request timed out" in ping_result:
+         #   return print("That address cannot be pinged from this host.")
+            else:
+                return ping_result
     
