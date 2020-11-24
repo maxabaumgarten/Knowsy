@@ -1,21 +1,26 @@
 #This is a very much work in progress.
-
 import sys
 import os
 import platform
 import ipaddress
 import csv
 from address import IpAddress
+from operating_system import OperatingSystem
 
-#Ask user for IP address
-#format/validate input
 print("Welcome to Knowsy!  I know everything about IP addresses and Domains(coming soon).")
+
+#Determine Operating System information
+print(f"\nLet's check what operating system you are running.")
+
+os_check =  platform.system()
+current_os = OperatingSystem(os_check)
+current_os.set_os()
 
 ip_input = input("What IP address do you want to know about? ")
 
 ip = IpAddress(ip_input)
 print(ip.return_ip_address())
-
+ip.ping_check()
 
 ip.set_ip_address("2.2.2.2")
 print(ip.return_ip_address())

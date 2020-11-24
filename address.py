@@ -1,12 +1,12 @@
 import ipaddress
-
+from pythonping import ping
 
 class IpAddress:
     """Represents an IP address"""
 
     def __init__(self, address):
         """Initialize an ip address"""
-        self.set_ip_address(address)
+        self.address = address
         self.validate_ip()
 
     def validate_ip(self):
@@ -23,3 +23,8 @@ class IpAddress:
     def set_ip_address(self, input_ip):
         self.address = input_ip
         self.validate_ip()
+    
+    def ping_check(self):
+        """Performs a ping check against the IP"""
+        ping_result = ping(self.address, count=4, verbose=True)
+        return ping_result
