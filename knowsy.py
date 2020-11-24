@@ -10,6 +10,7 @@ from operating_system import OperatingSystem
 print("Welcome to Knowsy!  I know everything about IP addresses and Domains(coming soon).")
 
 #Determine Operating System information
+#This may be removed as program is being developed as OS agnostic
 print(f"\nLet's check what operating system you are running.")
 
 os_check =  platform.system()
