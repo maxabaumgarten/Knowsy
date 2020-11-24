@@ -59,4 +59,3 @@ print(ip.return_ip_address())
             dns_result = os.system('host ' + address)
             print(dns_result)
         break """
-

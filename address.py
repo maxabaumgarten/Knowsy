@@ -23,15 +23,12 @@ class IpAddress:
     def set_ip_address(self, input_ip):
         self.address = input_ip
         self.validate_ip()
-    
+
     def ping_check(self):
         """Performs a ping check against the IP"""
         ping_result = ping(self.address, count=4, verbose=True)
         for response in ping_result:
-            if "Request timed out" in response:
+            if "Request timed out" == str(response):
                 return print("That address cannot be pinged from this host.")
-         #if "Request timed out" in ping_result:
-         #   return print("That address cannot be pinged from this host.")
             else:
                 return ping_result
-    
