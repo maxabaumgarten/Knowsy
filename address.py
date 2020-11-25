@@ -14,9 +14,11 @@ class IpAddress:
         """Check's if the IP is valid."""
         try:
             ipaddress.ip_address(self.address)
-            return print(f"'{self.address}' is a valid IP address.")
+            return True
+            # return print(f"'{self.address}' is a valid IP address.")
         except ValueError:
-            return print(f"'{self.address}' is not a valid IP address.")
+            return False
+            # return print(f"'{self.address}' is not a valid IP address.")
 
     def return_ip_address(self):
         return self.address

@@ -15,12 +15,20 @@ current_os = OperatingSystem(os_check)
 current_os.set_os()
 current_os.return_os()
 
+#NOTE: print statements and hardcoded IPs for testing
+#TODO for host in host_list.csv, run checks, add to csv
+
 #ip_input = input("What IP address do you want to know about? ")
 
 ip = IpAddress("10.10.10.10")
-print(ip.return_ip_address())
-#TODO needs to be conditioned on being a valid IP
-ip.ping_check(current_os.return_os())
+if ip.validate_ip():
+    ip.ping_check(current_os.return_os())
+else:
+    print("That address is not valid.")
+
+#print(ip.return_ip_address())
+#TODO #2 needs to be conditioned on being a valid IP
+#ip.ping_check(current_os.return_os())
 
 ip.set_ip_address("1.1.1.1")
 print(ip.return_ip_address())
