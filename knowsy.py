@@ -22,6 +22,7 @@ current_os.return_os()
 
 ip = IpAddress("10.10.10.10")
 print(ip.return_ip_address())
+#TODO needs to be conditioned on being a valid IP
 ip.ping_check(current_os.return_os())
 
 ip.set_ip_address("1.1.1.1")

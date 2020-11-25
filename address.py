@@ -24,13 +24,27 @@ class IpAddress:
     def set_ip_address(self, input_ip):
         self.address = input_ip
         self.validate_ip()
-#convert to subprocess from os.system
+
     def ping_check(self, operating_sys):
         """Performs a ping check against the IP with 4 pings."""
+        #Windows Ping Check
         if operating_sys == 'windows':
-            ping_result = subprocess.run('ping ' + self.address, capture_output=True)
-            #ping_result = os.system('ping ' + self.address)
-            return ping_result
+            self.ping_result = subprocess.run('ping ' + self.address, capture_output=True)
+            if "Lost = 4" in str(self.ping_result):
+                return print(f"{self.address} cannot be pinged from this host.")
+            elif ("Lost = 3" or "Lost = 2") in str(self.ping_result):
+                return print(f"The connection to {self.address} is shaky from this host.")
+            else:
+                return print(f"{self.address} can be pinged from this host.")
+        #Linux Ping Check
         elif operating_sys == 'linux':
-            ping_result = os.system('ping -c4 -w4  ' + self.address)
-            return ping_result
+            self.ping_result = subprocess.run('ping -c4 -w4  ' + self.address, capture_output=True)
+            if "100% packet loss" in str(self.ping_result):
+                return print(f"{self.address} cannot be pinged from this host.")
+            elif "0% packet loss" in str(self.ping_result):
+                return print(f"{self.address} can be pinged from this host.")
+            else:
+                return print(f"The connection to {self.address} is shaky from this host.")
+        #Apple Ping check
+        elif operating_sys == 'apple':
+            return print(f"Management hasn't paid for a $1,000 laptop shaped iPad yet.")
