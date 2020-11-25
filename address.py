@@ -29,19 +29,19 @@ class IpAddress:
         """Performs a ping check against the IP with 4 pings."""
         #Windows Ping Check
         if operating_sys == 'windows':
-            self.ping_result = subprocess.run(['ping', self.address], stdout=subprocess.PIPE)
-            if "Lost = 4" in str(self.ping_result):
+            self.ping_result = str(subprocess.run(['ping', self.address], stdout=subprocess.PIPE))
+            if "Lost = 4" in self.ping_result:
                 return print(f"{self.address} cannot be pinged from this host.")
-            elif ("Lost = 3" or "Lost = 2") in str(self.ping_result):
+            elif ("Lost = 3" or "Lost = 2") in self.ping_result:
                 return print(f"The connection to {self.address} is shaky from this host.")
             else:
                 return print(f"{self.address} can be pinged from this host.")
         #Linux Ping Check
         elif operating_sys == 'linux':
-            self.ping_result = subprocess.run(['ping', '-c4', '-w4', self.address], stdout=subprocess.PIPE)
-            if "100% packet loss" in str(self.ping_result):
+            self.ping_result = str(subprocess.run(['ping', '-c4', '-w4', self.address], stdout=subprocess.PIPE))
+            if "100% packet loss" in self.ping_result:
                 return print(f"{self.address} cannot be pinged from this host.")
-            elif "0% packet loss" in str(self.ping_result):
+            elif "0% packet loss" in self.ping_result:
                 return print(f"{self.address} can be pinged from this host.")
             else:
                 return print(f"The connection to {self.address} is shaky from this host.")
