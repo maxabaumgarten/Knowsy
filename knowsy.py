@@ -16,15 +16,17 @@ print(f"\nLet's check what operating system you are running.")
 os_check =  platform.system()
 current_os = OperatingSystem(os_check)
 current_os.set_os()
+current_os.return_os()
 
-ip_input = input("What IP address do you want to know about? ")
+#ip_input = input("What IP address do you want to know about? ")
 
-ip = IpAddress(ip_input)
+ip = IpAddress("10.10.10.10")
 print(ip.return_ip_address())
-ip.ping_check()
+ip.ping_check(current_os.return_os())
 
-ip.set_ip_address("2.2.2.2")
+ip.set_ip_address("1.1.1.1")
 print(ip.return_ip_address())
+ip.ping_check(current_os.return_os())
 
 ip.set_ip_address("codingiscool")
 print(ip.return_ip_address())

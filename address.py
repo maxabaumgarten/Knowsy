@@ -1,5 +1,6 @@
 import ipaddress
-from pythonping import ping
+import os
+import subprocess
 
 class IpAddress:
     """Represents an IP address"""
@@ -23,12 +24,13 @@ class IpAddress:
     def set_ip_address(self, input_ip):
         self.address = input_ip
         self.validate_ip()
-
-    def ping_check(self):
-        """Performs a ping check against the IP"""
-        ping_result = ping(self.address, count=4)
-        for response in ping_result:
-            if "Request timed out" == str(response):
-                return print("That address cannot be pinged from this host.")
-            else:
-                return ping_result
+#convert to subprocess from os.system
+    def ping_check(self, operating_sys):
+        """Performs a ping check against the IP with 4 pings."""
+        if operating_sys == 'windows':
+            ping_result = subprocess.run('ping ' + self.address, capture_output=True)
+            #ping_result = os.system('ping ' + self.address)
+            return ping_result
+        elif operating_sys == 'linux':
+            ping_result = os.system('ping -c4 -w4  ' + self.address)
+            return ping_result
