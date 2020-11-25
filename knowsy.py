@@ -1,9 +1,6 @@
 #This is a very much work in progress.
-import sys
-import os
 import platform
 import ipaddress
-import csv
 from address import IpAddress
 from operating_system import OperatingSystem
 
