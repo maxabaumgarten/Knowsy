@@ -9,7 +9,7 @@ A python program that tells you everything you want to know about an IP address 
 # Why use this?
 - Knowsy is useful for auditing of network assets.
 - Knowsy can help discover network paths/devices.
-- Knowsy automates can be used to perform DNS audits with ease.
+- Knowsy can be used to perform DNS audits with ease.
 
 # Forseable Issues
 - Pinging against non-existent/non-pingable IPs or Domains may cause significant slow downs.
