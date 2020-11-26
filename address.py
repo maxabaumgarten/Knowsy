@@ -33,20 +33,20 @@ class IpAddress:
         if operating_sys == 'windows':
             self.ping_result = str(subprocess.run(['ping', self.address], stdout=subprocess.PIPE))
             if "Lost = 4" in self.ping_result:
-                return print(f"{self.address} cannot be pinged from this host.")
+                return "No"
             elif ("Lost = 3" or "Lost = 2") in self.ping_result:
-                return print(f"The connection to {self.address} is shaky from this host.")
+                return "Shaky"
             else:
-                return print(f"{self.address} can be pinged from this host.")
+                return "Yes"
         #Linux Ping Check
         elif operating_sys == 'linux':
             self.ping_result = str(subprocess.run(['ping', '-c4', '-w4', self.address], stdout=subprocess.PIPE))
             if "100% packet loss" in self.ping_result:
-                return print(f"{self.address} cannot be pinged from this host.")
+                return "No"
             elif "0% packet loss" in self.ping_result:
-                return print(f"{self.address} can be pinged from this host.")
+                return "Yes"
             else:
-                return print(f"The connection to {self.address} is shaky from this host.")
+                return "Shaky"
         #Apple Ping Check
         else:
             return print(f"Put a feature request in @ https://github.com/maxabaumgarten/Knowsy.")
