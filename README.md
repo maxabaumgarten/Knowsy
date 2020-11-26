@@ -1,4 +1,4 @@
-# Knowsy
+# ༼ つ ◕_◕ ༽つ Knowsy ༼ つ ◕_◕ ༽つ
 A python program that tells you everything you want to know about an IP address or Domain Name.
 
 # Planned Functionality
