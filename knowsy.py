@@ -1,6 +1,7 @@
 #This is a very much work in progress.
 import platform
 import ipaddress
+import csv
 from address import IpAddress
 from operating_system import OperatingSystem
 
@@ -18,7 +19,21 @@ current_os.return_os()
 #NOTE: print statements and hardcoded IPs for testing
 #TODO for host in host_list.csv, run checks, add to csv
 
-#ip_input = input("What IP address do you want to know about? ")
+#Test Vars for CSV
+testip = "9.9.9.9"
+testdomain = "quad9.com"
+testping = 'Yes'
+testroute = '10.0.1.1 > 6.7.8.9 > 9.9.9.1'
+#open the CSV
+name_request = input("Save Knowsy CSV file as?" )
+filename = name_request + '.csv'
+
+with open(filename, 'w') as file_object:
+    file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+    file_writer.writerow(['IP', 'Domain', 'Ping', 'Routes'])
+    file_writer.writerow([testip, testdomain, testping, testroute])
+
 
 #Offline IP
 ip = IpAddress("10.10.10.10")
