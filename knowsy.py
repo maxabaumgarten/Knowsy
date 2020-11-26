@@ -5,11 +5,25 @@ import csv
 from address import IpAddress
 from operating_system import OperatingSystem
 
-print(" ༼ つ ◕_◕ ༽つ Welcome to Knowsy!  I know everything about IP addresses and Domains(coming soon).")
+#Knowsy terminal messages
+msg_mascot = "༼ つ ◕_◕ ༽つ"
+msg_welcome = msg_mascot + " Welcome to Knowsy!  Knowsy knows everything about IP addresses and Domains(coming soon)."
+msg_os_check = msg_mascot + " Let's check what operating system you are running."
+msg_begin = msg_mascot + " Knowsy has begun the process of putting it's Knowse in things..."
+msg_end = msg_mascot + " Knowsy Knows things about your network.  Your CSV is ready!"
+msg_csv = msg_mascot + " Save Knowsy CSV file as? "
+msg_host = msg_mascot + " What is the name of your host file (.txt ONLY)? "
 
+#Default Check Results
+#TODO NEED to call defaults instead of last run variable value
+ping_answer = "N/A"
+dns_answer = "N/A"
+trace_answer = "N/A"
+
+#BEGIN
+print(msg_welcome)
 #Determine Operating System information
-#This may be removed as program is being developed as OS agnostic
-print(f"\n ༼ つ ◕_◕ ༽つ Let's check what operating system you are running.")
+print(msg_os_check)
 
 os_check =  platform.system()
 current_os = OperatingSystem(os_check)
@@ -26,7 +40,7 @@ testping = 'Yes'
 testroute = '10.0.1.1 > 6.7.8.9 > 9.9.9.1'
 
 #Create and Setup the CSV
-name_request = input(" ༼ つ ◕_◕ ༽つ Save Knowsy CSV file as? ")
+name_request = input(msg_csv)
 filename = name_request + '.csv'
 
 with open(filename, 'w') as file_object:
@@ -35,23 +49,34 @@ with open(filename, 'w') as file_object:
 
 #Ask user for whole file
 #TODO validate file exists, exception catch
-hostfile = input(" ༼ つ ◕_◕ ༽つ What is the name of your host file (.txt ONLY)? ")
+hostfile = input(msg_host)
 
-print("༼ つ ◕_◕ ༽つ Knowsy has begun the process of putting it's Knowse in things...")
+print(msg_begin)
 
 with open(hostfile, "r") as h_file:
     for host in h_file:
         #Validate IP
         ip = IpAddress(host.rstrip())
+        ip_adr = ip.return_ip_address()
         if ip.validate_ip():
-            #Ping Test
+            print(f"{msg_mascot} Knowsy is currently pinging {ip_adr}.")
+            #Ping Check
             ping_answer = ip.ping_check(current_os.return_os())
+            #DNS Check
+            print(f"{msg_mascot} Knowsy is finding {ip_adr}'s Domain Name.")
+            dns_answer = ip.dns_check()
+            #Traceroute Check
+            print(f"{msg_mascot} Knowsy is tracing the routes to {ip_adr}. (This might take a while...)")
+            trace_answer = ip.trace_check(current_os.return_os())
+            #Write tests to CSV
             with open(filename, 'a') as file_object:
                 file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                file_writer.writerow([ip.return_ip_address(), testdomain, ping_answer, testroute])
+                file_writer.writerow([ip_adr, dns_answer, ping_answer, trace_answer])
         else:
+            print(f"{msg_mascot} {ip_adr} is not a valid IP address.")
             with open(filename, 'a') as file_object:
                 file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                file_writer.writerow([ip.return_ip_address(), 'Invalid IP', 'Invalid IP', 'Invalid IP'])
+                #TODO NEED to call defaults instead of last run variable value
+                file_writer.writerow([ip_adr + ' (INVALID)', 'N/A', 'N/A', 'N/A'])
 
-print("༼ つ ◕_◕ ༽つ Knowsy Knows things about your network.  Your CSV is ready!")
+print(msg_end)

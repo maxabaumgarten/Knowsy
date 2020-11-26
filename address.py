@@ -1,6 +1,7 @@
 import ipaddress
 import os
 import subprocess
+import socket
 
 class IpAddress:
     """Represents an IP address"""
@@ -50,3 +51,18 @@ class IpAddress:
         #Apple Ping Check
         else:
             return print(f"Put a feature request in @ https://github.com/maxabaumgarten/Knowsy.")
+    
+    def dns_check(self):
+        """Performs a DNS lookup on the provided IP"""
+        try:
+            return socket.gethostbyaddr(self.address)
+        except:
+            return "No DNS Entry"
+
+    def trace_check(self, operating_sys):
+        """Performs a traceroute to the IP with max 30 Hops"""
+        if operating_sys == 'windows':
+            self.trace_result = str(subprocess.run(['tracert', '/h', '30', self.address], stdout=subprocess.PIPE))
+            return self.trace_result
+        else:
+            return "WERE WORKIN ON IT!"
