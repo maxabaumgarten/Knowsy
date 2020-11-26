@@ -20,19 +20,23 @@ current_os.return_os()
 
 #ip_input = input("What IP address do you want to know about? ")
 
+#Offline IP
 ip = IpAddress("10.10.10.10")
 if ip.validate_ip():
     ip.ping_check(current_os.return_os())
 else:
-    print("That address is not valid.")
+    print(f"{ip.return_ip_address} is not valid.")
 
-#print(ip.return_ip_address())
-#TODO #2 needs to be conditioned on being a valid IP
-#ip.ping_check(current_os.return_os())
-
+#Valid IP
 ip.set_ip_address("1.1.1.1")
-print(ip.return_ip_address())
-ip.ping_check(current_os.return_os())
+if ip.validate_ip():
+    ip.ping_check(current_os.return_os())
+else:
+    print((f"{ip.return_ip_address} is not valid.")
 
+#Invalid IP
 ip.set_ip_address("codingiscool")
-print(ip.return_ip_address())
+if ip.validate_ip():
+    ip.ping_check(current_os.return_os())
+else:
+    print(f"{ip.return_ip_address} is not valid.")
