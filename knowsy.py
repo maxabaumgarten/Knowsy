@@ -25,18 +25,18 @@ ip = IpAddress("10.10.10.10")
 if ip.validate_ip():
     ip.ping_check(current_os.return_os())
 else:
-    print(f"{ip.return_ip_address} is not valid.")
+    print(f"{ip.return_ip_address()} is not valid.")
 
 #Valid IP
 ip.set_ip_address("1.1.1.1")
 if ip.validate_ip():
     ip.ping_check(current_os.return_os())
 else:
-    print((f"{ip.return_ip_address} is not valid.")
+    print(f"{ip.return_ip_address()} is not valid.")
 
 #Invalid IP
 ip.set_ip_address("codingiscool")
 if ip.validate_ip():
     ip.ping_check(current_os.return_os())
 else:
-    print(f"{ip.return_ip_address} is not valid.")
+    print(f"{ip.return_ip_address()} is not valid.")

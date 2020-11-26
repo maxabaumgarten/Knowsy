@@ -48,5 +48,5 @@ class IpAddress:
             else:
                 return print(f"The connection to {self.address} is shaky from this host.")
         #Apple Ping Check
-        elif operating_sys == 'apple':
-            return print(f"Management hasn't paid for a $1,000 laptop shaped iPad yet.")
+        else:
+            return print(f"Put a feature request in @ https://github.com/maxabaumgarten/Knowsy.")
