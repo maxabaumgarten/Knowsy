@@ -13,6 +13,7 @@ msg_begin = msg_mascot + " Knowsy has begun the process of putting it's Knowse i
 msg_end = msg_mascot + " Knowsy Knows things about your network.  Your CSV is ready!"
 msg_csv = msg_mascot + " Save Knowsy CSV file as? "
 msg_host = msg_mascot + " What is the name of your host file (.txt ONLY)? "
+msg_trace = msg_mascot + " Do you want to traceroute (BETA - Skipping is Faster)? y/n: "
 
 #Default Check Results
 #TODO NEED to call defaults instead of last run variable value
@@ -30,14 +31,7 @@ current_os = OperatingSystem(os_check)
 current_os.set_os()
 current_os.return_os()
 
-#NOTE: print statements and hardcoded IPs for testing
 #TODO for host in host_list.csv, run checks, add to csv
-
-#Test Vars for CSV
-testip = "9.9.9.9"
-testdomain = "quad9.com"
-testping = 'Yes'
-testroute = '10.0.1.1 > 6.7.8.9 > 9.9.9.1'
 
 #Create and Setup the CSV
 name_request = input(msg_csv)
@@ -50,6 +44,18 @@ with open(filename, 'w') as file_object:
 #Ask user for whole file
 #TODO validate file exists, exception catch
 hostfile = input(msg_host)
+
+#Ask if user wants to trace route
+trace_req = None
+while trace_req not in ("y", "n"):
+    trace_req = input(msg_trace)
+    if trace_req == "y":
+        continue
+    elif trace_req == "n":
+        continue
+    else:
+        trace_req = input(msg_trace)
+
 
 print(msg_begin)
 
@@ -66,8 +72,12 @@ with open(hostfile, "r") as h_file:
             print(f"{msg_mascot} Knowsy is finding {ip_adr}'s Domain Name.")
             dns_answer = ip.dns_check()
             #Traceroute Check
-            print(f"{msg_mascot} Knowsy is tracing the routes to {ip_adr}. (This might take a while...)")
-            trace_answer = ip.trace_check(current_os.return_os())
+
+            if trace_req == "y":
+                print(f"{msg_mascot} Knowsy is tracing the routes to {ip_adr}. (This might take a while...)")
+                trace_answer = ip.trace_check(current_os.return_os())
+            else:
+                print(f"{msg_mascot} is not tracing routes to {ip_adr}.")
             #Write tests to CSV
             with open(filename, 'a') as file_object:
                 file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
