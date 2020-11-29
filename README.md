@@ -24,6 +24,11 @@ A python program that tells you everything you want to know about an IP address 
 - Pinging against non-existent/non-pingable IPs or Domains may cause significant slow downs.
 - Traceroute to non-existent/non-pingable IPs or Domains may cause significant slow downs. (Trace Route is now optional.
 
+# Requirements/Dependencies
+- Python3
+- Traceroute
+- NMAP
+
 # How To Use
 - Run knowsy.py in same location as <hosts>.txt file.
 - Linux users requires 'root' due to subprocess module.
