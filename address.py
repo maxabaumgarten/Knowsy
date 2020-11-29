@@ -48,7 +48,7 @@ class IpAddress:
                 return "Yes"
             else:
                 return "Shaky"
-        #Apple Ping Check
+        #Other Ping Check
         else:
             return print(f"Put a feature request in @ https://github.com/maxabaumgarten/Knowsy.")
     
@@ -64,5 +64,8 @@ class IpAddress:
         if operating_sys == 'windows':
             self.trace_result = str(subprocess.run(['tracert', '/h', '30', self.address], stdout=subprocess.PIPE))
             return self.trace_result
+        elif operating_sys == 'linux':
+            self.trace_result = str(subprocess.run(['traceroute', '/h', '30', self.address], stdout=subprocess.PIPE))
+            return self.trace_result
         else:
-            return "WERE WORKIN ON IT!"
+            return "WERE WORKIN ON IT! Feature request  @ https://github.com/maxabaumgarten/Knowsy."
