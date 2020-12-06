@@ -68,4 +68,4 @@ class IpAddress:
             self.trace_result = str(subprocess.run(['traceroute', self.address], stdout=subprocess.PIPE))
             return self.trace_result
         else:
-            return "WERE WORKIN ON IT! Feature request  @ https://github.com/maxabaumgarten/Knowsy."
+            return "WE'RE WORKING ON IT! Feature request  @ https://github.com/maxabaumgarten/Knowsy."

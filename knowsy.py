@@ -72,7 +72,6 @@ with open(hostfile, "r") as h_file:
             print(f"{msg_mascot} Knowsy is finding {ip_adr}'s Domain Name.")
             dns_answer = ip.dns_check()
             #Traceroute Check
-
             if trace_req == "y":
                 print(f"{msg_mascot} Knowsy is tracing the routes to {ip_adr}. (This might take a while...)")
                 trace_answer = ip.trace_check(current_os.return_os())
