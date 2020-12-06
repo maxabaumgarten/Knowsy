@@ -4,6 +4,7 @@ import ipaddress
 import csv
 from address import IpAddress
 from operating_system import OperatingSystem
+from domain import DomainName
 
 #Knowsy terminal messages
 msg_mascot = "༼ つ ◕_◕ ༽つ"
@@ -19,6 +20,7 @@ msg_trace = msg_mascot + " Do you want to traceroute (BETA - Skipping is Faster)
 #TODO NEED to call defaults instead of last run variable value
 ping_answer = "N/A"
 dns_answer = "N/A"
+related_answer = "N/A"
 trace_answer = "N/A"
 
 #BEGIN
@@ -39,7 +41,7 @@ filename = name_request + '.csv'
 
 with open(filename, 'w') as file_object:
     file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    file_writer.writerow(['IP', 'Domain', 'Ping', 'Routes'])
+    file_writer.writerow(['IP', 'Domain', 'Related IPs' 'Ping', 'Routes'])
 
 #Ask user for whole file
 #TODO validate file exists, exception catch
@@ -71,6 +73,10 @@ with open(hostfile, "r") as h_file:
             #DNS Check
             print(f"{msg_mascot} Knowsy is finding {ip_adr}'s Domain Name.")
             dns_answer = ip.dns_check()
+            #DNS Lookup on Domain Name
+            print(f"{msg_mascot} Knowsy is finding other IPs attached to {ip_adr}'s Domain Name.")
+            domain = DomainName(dns_answer)
+            related_answer = domain.name_lookup()
             #Traceroute Check
             if trace_req == "y":
                 print(f"{msg_mascot} Knowsy is tracing the routes to {ip_adr}. (This might take a while...)")
@@ -80,7 +86,7 @@ with open(hostfile, "r") as h_file:
             #Write tests to CSV
             with open(filename, 'a') as file_object:
                 file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                file_writer.writerow([ip_adr, dns_answer, ping_answer, trace_answer])
+                file_writer.writerow([ip_adr, dns_answer, related_answer, ping_answer, trace_answer])
         else:
             print(f"{msg_mascot} {ip_adr} is not a valid IP address.")
             with open(filename, 'a') as file_object:
