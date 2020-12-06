@@ -2,7 +2,7 @@
 A python program that tells you everything you want to know about an IP address or Domain Name.
 
 # What Does Knowsy Do?
-- Knowsy accepts a .txt or file with a list of IP addresses (Single Host - /32 Support Only)
+- Knowsy accepts a .txt file with a list of IP addresses (Single Host - /32 Support Only)
 - Knowsy will perform a Ping Check, DNS Lookup, Traceroute on each IP given.
 - Knowsy will  format a CSV file with all the information it found about the IPs.
 
