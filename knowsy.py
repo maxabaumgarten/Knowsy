@@ -41,7 +41,7 @@ filename = name_request + '.csv'
 
 with open(filename, 'w') as file_object:
     file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    file_writer.writerow(['IP', 'Domain', 'Related IPs' 'Ping', 'Routes'])
+    file_writer.writerow(['IP', 'Domain', 'Related_IPs', 'Ping', 'Routes'])
 
 #Ask user for whole file
 #TODO validate file exists, exception catch
@@ -92,6 +92,6 @@ with open(hostfile, "r") as h_file:
             with open(filename, 'a') as file_object:
                 file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 #TODO NEED to call defaults instead of last run variable value
-                file_writer.writerow([ip_adr + ' (INVALID)', 'N/A', 'N/A', 'N/A'])
+                file_writer.writerow([ip_adr + ' (INVALID)', 'N/A', 'N/A', 'N/A', 'N/A'])
 
 print(msg_end)
