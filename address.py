@@ -55,7 +55,8 @@ class IpAddress:
     def dns_check(self):
         """Performs a DNS lookup on the provided IP"""
         try:
-            return socket.gethostbyaddr(self.address)
+            dns_response = socket.gethostbyaddr(self.address)[0]
+            return dns_response
         except:
             return "No DNS Entry"
 
