@@ -12,17 +12,18 @@ A python program that tells you everything you want to know about an IP address 
 - Knowsy can be used to perform DNS audits with ease.
 
 # Upcoming Features
+(~Strikethrough~ = Completed)
 - Subnet Support
 - DNS Input
 - Option Condition Based Domain Lookups (DNS Lookup Only If Ping)
 - NMAP OS Detection
 - CSV Inputs
 - Formated Trace Outputs
-- Input/Output File Path Support
+- ~Input~/Output File Path Support
 
-# Forseable Issues
+# Issues
 - Pinging against non-existent/non-pingable IPs or Domains may cause significant slow downs.
-- Traceroute to non-existent/non-pingable IPs or Domains may cause significant slow downs. (Trace Route is now optional.
+- Traceroute to non-existent/non-pingable IPs or Domains may cause significant slow downs. (Trace Route is now optional.)
 
 # Requirements/Dependencies
 - Python3
