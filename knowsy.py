@@ -5,6 +5,7 @@ import csv
 from address import IpAddress
 from operating_system import OperatingSystem
 from domain import DomainName
+from generator import TheCSV
 
 #Knowsy terminal messages
 msg_mascot = "༼ つ ◕_◕ ༽つ"
@@ -37,11 +38,10 @@ current_os.return_os()
 
 #Create and Setup the CSV
 name_request = input(msg_csv)
-filename = name_request + '.csv'
+resultfile = TheCSV(name_request)
 
-with open(filename, 'w') as file_object:
-    file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    file_writer.writerow(['IP', 'Domain', 'Related_IPs', 'Ping', 'Routes'])
+#Should not need to be called since called when initialized
+#resultfile.create_csv()
 
 #Ask user for whole file
 #TODO validate file exists, exception catch
@@ -84,14 +84,8 @@ with open(hostfile, "r") as h_file:
             else:
                 print(f"{msg_mascot} is not tracing routes to {ip_adr}.")
             #Write tests to CSV
-            with open(filename, 'a') as file_object:
-                file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                file_writer.writerow([ip_adr, dns_answer, related_answer, ping_answer, trace_answer])
+            resultfile.append_csv(ip_adr, dns_answer, related_answer, ping_answer, trace_answer)
         else:
-            print(f"{msg_mascot} {ip_adr} is not a valid IP address.")
-            with open(filename, 'a') as file_object:
-                file_writer = csv.writer(file_object, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                #TODO NEED to call defaults instead of last run variable value
-                file_writer.writerow([ip_adr + ' (INVALID)', 'N/A', 'N/A', 'N/A', 'N/A'])
+            resultfile.append_csv(ip_adr + ' (INVALID)', 'N/A', 'N/A', 'N/A', 'N/A')
 
 print(msg_end)

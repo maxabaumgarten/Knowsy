@@ -6,7 +6,7 @@ class TheCSV:
     
     def __init__(self, csv_file):
         """Initializes a CSV object"""
-        self.csv_file =  csv_file
+        self.csv_file =  csv_file + ".csv"
         self.create_csv()
 
     def create_csv(self):
