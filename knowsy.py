@@ -1,7 +1,5 @@
 #This is a very much work in progress.
 import platform
-import ipaddress
-import csv
 from address import IpAddress
 from operating_system import OperatingSystem
 from domain import DomainName
@@ -15,7 +13,7 @@ msg_begin = msg_mascot + " Knowsy has begun the process of putting it's Knowse i
 msg_end = msg_mascot + " Knowsy Knows things about your network.  Your CSV is ready!"
 msg_csv = msg_mascot + " Save Knowsy CSV file as? "
 msg_host = msg_mascot + " What is the name of your host file (.txt ONLY)? "
-msg_trace = msg_mascot + " Do you want to traceroute (BETA - Skipping is Faster)? y/n: "
+msg_trace = msg_mascot + " BETA: Do you want to traceroute (Skipping is Faster)? y/n: "
 
 #Default Check Results
 #TODO NEED to call defaults instead of last run variable value
@@ -42,7 +40,18 @@ resultfile = TheCSV(name_request)
 
 #Ask user for whole file
 #TODO validate file exists, exception catch
-hostfile = input(msg_host)
+
+while True:
+    hostfile = input(msg_host)
+    if ".txt" in hostfile:
+        try:
+            with open(hostfile, 'r') as file_object:
+                print(f"{msg_mascot} The file has been validated.")
+                break
+        except IOError:
+            print(f"{msg_mascot} I can't find your host file!")
+    else:
+        print(f"{msg_mascot} The file needs to be a .txt file please.")
 
 #Ask if user wants to trace route
 trace_req = None
