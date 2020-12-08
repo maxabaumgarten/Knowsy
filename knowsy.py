@@ -40,9 +40,6 @@ current_os.return_os()
 name_request = input(msg_csv)
 resultfile = TheCSV(name_request)
 
-#Should not need to be called since called when initialized
-#resultfile.create_csv()
-
 #Ask user for whole file
 #TODO validate file exists, exception catch
 hostfile = input(msg_host)

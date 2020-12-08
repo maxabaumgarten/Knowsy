@@ -16,11 +16,5 @@ class OperatingSystem:
     def return_os(self):
         get_os = self.name.lower()
         return get_os
-
-
-    #validate supported operating systems
-
-class Windows(OperatingSystem):
-    """Represents a windows operating system"""
     
 
