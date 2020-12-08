@@ -13,7 +13,7 @@ class DomainName:
     
     def name_lookup(self):
         try:
-            name_response = socket.gethostbyname_ex(self.domain)[3]
+            name_response = socket.gethostbyname_ex(self.domain)
             return name_response
         except:
             return "No DNS Entry"
