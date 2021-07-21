@@ -35,6 +35,5 @@ A python program that tells you everything you want to know about an IP address 
 - Linux users requires 'root' due to subprocess module.
 
 # Status
-This is as pre-alpha as it gets.
-
+- This is as pre-alpha as it gets.
 - This was more of a way to practice python than something useful at this time.  You should just use NMAP as it can do this way better and much more.
